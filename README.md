@@ -22,8 +22,12 @@ a 9-axis-class IMU sampled at roughly 833 Hz on an nRF52 microcontroller.
 
 ## Usage
 
-```sh
-python3 analytics/punchpath.py recording.jsonl
+```python
+from punchpath import load, punches
+
+samples = load("recording.jsonl")
+for p in punches(samples):
+    print(p["ms"], p["vpeak"], p["reach"], p["peak_g"])
 ```
 
 Each line of a recording is `[t_ms, qw, qx, qy, qz, ax_mg, ay_mg, az_mg, rest_mg, flags]`.
